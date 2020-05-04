@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(250,250,250);
+    /* background-color: rgb(250,250,250); */
+    background-color: #121212;
 }
 
 .container{
@@ -10,9 +11,14 @@ body{
 }
 
 .image{
-    width: 370px;
+    width: 75%;
     margin-top: 50px;
 }
+
+.btn{
+    margin-bottom: 50px !important;
+}
+
 
 @media (max-width:770px){
 

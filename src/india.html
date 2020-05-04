@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <style>
+        #myTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#myTable td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#myTable tr:nth-child(even){background-color: #121212; color: white;}
+#myTable tr{color: #ddd;}
+#myTable tr:hover {background-color: #202020; color: white;}
+
+#myTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #4CAF50;
+}
+span {
+  text-align: center;
+  text-transform: uppercase;
+  color: orangered;
+}
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-color: #121212;
+  color: #ddd;
+  background-image: url('../images/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+    </style>
+    
+    
+    </head>
+<body style="background-color: #121212;">
+<h1>LIVE COVID DATA DETAILS : <span>INDIA</span></h1>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for states.." title="Type in a name">
+
+    <table style="width:100%" id="myTable" border="2">
+        <tr>
+          <th  style="text-align:center">State</th>
+          <th  style="text-align:center">Confirmed Cases</th>
+          <th  style="text-align:center">Active Cases</th>
+          <th  style="text-align:center">Recovered Cases</th>
+          <th  style="text-align:center">Death</th>
+          <th  style="text-align:center">Last Updated</th>
+        </tr>
+
+      </table>
+
+<script>
+
+
+var xhttp = new XMLHttpRequest();
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var tr="";
+        // console.log(typeof(this.responseText));
+       var cts = JSON.parse(this.responseText).statewise;
+for(var i=0;i<=cts.length-1;i++){
+tr=tr + "<tr><td>" + cts[i].state + "</td><td style='text-align:right'>" + cts[i].confirmed + "</td><td style='text-align:right'>"+ cts[i].active + "</td><td style='text-align:right'>"+ cts[i].recovered + "</td><td style='text-align:right'>" + cts[i].deaths + "</td><td>" + cts[i].lastupdatedtime + "</td></tr>";
+}
+$("tr").after(tr);
+
+}
+  };
+
+  xhttp.open("GET", "https://api.covid19india.org/data.json", true);
+  xhttp.send();
+
+
+
+  function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+</script>
+
+</body>
+</html>

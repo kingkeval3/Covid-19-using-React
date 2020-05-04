@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 
 // import Cards from './components/Cards/Cards';
 // import Chart from './components/Chart/Chart';
@@ -11,14 +13,17 @@ import {Cards, Chart, CountryPicker} from './components';
 import styles from './App.module.css';
 import { fetchData } from './api';
 
-import coronaImage from './images/image.png'
+import coronaImage from './images/cf.gif'
+
 
 class App extends React.Component {
+
+
 
     //immediete constructed of component in backend
     state = {
         data:{},
-        country:''
+        country:'',
     }
 
     async componentDidMount() {
@@ -54,6 +59,7 @@ const {data, country} = this.state;
             <img className={styles.image} src={coronaImage} alt="COVID-19" />
                 <Cards data={data} />
                 <CountryPicker handleCountryChange={this.handleCountryChange} />
+            <Button className={styles.btn} color="secondary" variant="outlined" href="https://covid-statewise-india-kmj.netlify.app"> here for India's Explicit Details</Button>
                 <Chart data={data} country={country}/>
             </div>
         )
