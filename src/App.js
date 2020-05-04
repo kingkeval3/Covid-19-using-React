@@ -59,7 +59,7 @@ const {data, country} = this.state;
             <img className={styles.image} src={coronaImage} alt="COVID-19" />
                 <Cards data={data} />
                 <CountryPicker handleCountryChange={this.handleCountryChange} />
-            <Button className={styles.btn} color="secondary" variant="outlined" href="https://covid-statewise-india-kmj.netlify.app"> here for India's Explicit Details</Button>
+            <Button className={styles.btn} color="secondary" variant="outlined" href="https://covid-statewise-india-kmj.netlify.app">check here for India's Explicit Details</Button>
                 <Chart data={data} country={country}/>
             </div>
         )
